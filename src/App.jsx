@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Header } from './components/Header'
+import { GithubProfileInfo } from './components/GithubProfileInfo'
 import { fetchGithubProfile } from './services/githubProfile'
 import './App.css'
 
@@ -29,6 +30,7 @@ function App() {
   return (
     <div className="h-screen font-be-vietnam-pro">
       <Header changeUsername={changeUsername} />
+      {usernameInfo && <GithubProfileInfo />}
     </div>
   )
 }
