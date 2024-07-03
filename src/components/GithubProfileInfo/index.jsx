@@ -1,28 +1,54 @@
+import PropTypes from 'prop-types'
 import { StatBox } from '../StatBox'
 import { RepositoryCard } from '../RepositoryCard'
-import imgProfile from './../../resources/images/jonasImg.png'
 
-export function GithubProfileInfo() {
+export function GithubProfileInfo({ usernameInfo, reposList }) {
   return (
     <main className="min-h-[70%] px-[20%] py-3 bg-dark3">
       <section className="flex items-start gap-7 relative">
         <img
-          src={imgProfile}
+          src={usernameInfo.avatar_url}
           alt="Profile image"
           className="w-[120px] -translate-y-[60px] border-dark3 border-8 rounded-xl"
         />
-        <StatBox statName="Followers" statValue={27839} />
-        <StatBox statName="Following" statValue={0} />
-        <StatBox statName="Location" statValue="San Francisco, CA" />
+        <StatBox statName="Followers" statValue={usernameInfo.followers} />
+        <StatBox statName="Following" statValue={usernameInfo.following} />
+        <StatBox
+          statName="Location"
+          statValue={usernameInfo.location ? usernameInfo.location : 'N/A'}
+        />
       </section>
-      <h1 className="text-3xl text-lightGray">Jonas4899</h1>
-      <p className="my-4 text-base text-gray3">How people build software.</p>
+      <h1 className="text-3xl text-lightGray">{usernameInfo.login}</h1>
+      <p className="my-4 text-base text-gray3">{usernameInfo.bio}</p>
       <section className="grid grid-cols-2 gap-10">
-        <RepositoryCard />
-        <RepositoryCard />
-        <RepositoryCard />
-        <RepositoryCard />
+        {reposList && reposList.length > 0 ? (
+          reposList.map((repo) => (
+            <RepositoryCard
+              key={repo.id}
+              repoName={repo.name}
+              description={repo.description}
+              license={repo.license?.name}
+              forks={repo.forks}
+              stargazersCount={repo.stargazers_count}
+              repoUrl={repo.html_url}
+            />
+          ))
+        ) : (
+          <p>No repositories found.</p>
+        )}
       </section>
     </main>
   )
+}
+
+GithubProfileInfo.propTypes = {
+  usernameInfo: PropTypes.shape({
+    avatar_url: PropTypes.string.isRequired,
+    followers: PropTypes.number.isRequired,
+    following: PropTypes.number.isRequired,
+    location: PropTypes.string,
+    login: PropTypes.string.isRequired,
+    bio: PropTypes.string
+  }).isRequired,
+  reposList: PropTypes.array
 }

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { SearchIcon } from './../../resources/icons/SearchIcon.jsx'
 import heroImage from './../../resources/images/hero-image-github-profile.png'
 
@@ -24,4 +25,8 @@ export function Header({ changeUsername }) {
       </form>
     </header>
   )
+}
+
+Header.propTypes = {
+  changeUsername: PropTypes.func.isRequired
 }
