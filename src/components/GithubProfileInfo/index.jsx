@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { StatBox } from '../StatBox'
 import { RepositoryCard } from '../RepositoryCard'
+import { formatDate } from '../../utilities/formatDate'
 
 export function GithubProfileInfo({ usernameInfo, reposList }) {
   return (
@@ -11,8 +12,14 @@ export function GithubProfileInfo({ usernameInfo, reposList }) {
           alt="Profile image"
           className="w-[120px] -translate-y-[60px] border-dark3 border-8 rounded-xl"
         />
-        <StatBox statName="Followers" statValue={usernameInfo.followers} />
-        <StatBox statName="Following" statValue={usernameInfo.following} />
+        <StatBox
+          statName="Followers"
+          statValue={usernameInfo.followers.toString()}
+        />
+        <StatBox
+          statName="Following"
+          statValue={usernameInfo.following.toString()}
+        />
         <StatBox
           statName="Location"
           statValue={usernameInfo.location ? usernameInfo.location : 'N/A'}
@@ -31,6 +38,7 @@ export function GithubProfileInfo({ usernameInfo, reposList }) {
               forks={repo.forks}
               stargazersCount={repo.stargazers_count}
               repoUrl={repo.html_url}
+              lastUpdateDate={formatDate(repo.updated_at)}
             />
           ))
         ) : (

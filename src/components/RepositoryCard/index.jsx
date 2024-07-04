@@ -5,12 +5,12 @@ import { StarIcon } from './../../resources/icons/StarIcon'
 
 export function RepositoryCard({
   repoName,
-  description,
-  license,
-  forks,
-  stargazersCount,
+  description = 'No description provided',
+  license = null,
+  forks = 0,
+  stargazersCount = 0,
   repoUrl,
-  lastUpdateDate
+  lastUpdateDate = 'recently'
 }) {
   return (
     <a
@@ -54,12 +54,4 @@ RepositoryCard.propTypes = {
   stargazersCount: PropTypes.number,
   repoUrl: PropTypes.string.isRequired,
   lastUpdateDate: PropTypes.string
-}
-
-RepositoryCard.defaultProps = {
-  description: 'No description provided',
-  license: null,
-  forks: 0,
-  stargazersCount: 0,
-  lastUpdateDate: 'recently'
 }

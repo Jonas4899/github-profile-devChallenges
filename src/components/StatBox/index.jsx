@@ -13,5 +13,5 @@ export function StatBox({ statName, statValue }) {
 
 StatBox.propTypes = {
   statName: PropTypes.string.isRequired,
-  statValue: PropTypes.number.isRequired
+  statValue: PropTypes.string.isRequired
 }
