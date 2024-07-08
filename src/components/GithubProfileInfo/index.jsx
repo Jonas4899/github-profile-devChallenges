@@ -3,7 +3,13 @@ import { StatBox } from '../StatBox'
 import { RepositoryCard } from '../RepositoryCard'
 import { formatDate } from '../../utilities/formatDate'
 
-export function GithubProfileInfo({ usernameInfo, reposList }) {
+export function GithubProfileInfo({
+  usernameInfo,
+  reposList = [],
+  showAllRepos,
+  toggleShowAllRepos
+}) {
+  let reposToShow = showAllRepos ? reposList : reposList.slice(0, 4)
   return (
     <main className="min-h-[70%] px-[20%] py-3 bg-dark3">
       <section className="flex items-start gap-7 relative">
@@ -29,7 +35,7 @@ export function GithubProfileInfo({ usernameInfo, reposList }) {
       <p className="my-4 text-base text-gray3">{usernameInfo.bio}</p>
       <section className="grid grid-cols-2 gap-10">
         {reposList && reposList.length > 0 ? (
-          reposList.map((repo) => (
+          reposToShow.map((repo) => (
             <RepositoryCard
               key={repo.id}
               repoName={repo.name}
@@ -38,11 +44,20 @@ export function GithubProfileInfo({ usernameInfo, reposList }) {
               forks={repo.forks}
               stargazersCount={repo.stargazers_count}
               repoUrl={repo.html_url}
-              lastUpdateDate={formatDate(repo.updated_at)}
+              lastUpdateDate={formatDate(repo.pushed_at)}
             />
           ))
         ) : (
           <p>No repositories found.</p>
+        )}
+
+        {!showAllRepos && (
+          <button
+            className="text-lightGray text-sm col-span-2"
+            onClick={toggleShowAllRepos}
+          >
+            View all repositories
+          </button>
         )}
       </section>
     </main>
@@ -58,5 +73,7 @@ GithubProfileInfo.propTypes = {
     login: PropTypes.string.isRequired,
     bio: PropTypes.string
   }).isRequired,
-  reposList: PropTypes.array
+  reposList: PropTypes.array,
+  showAllRepos: PropTypes.bool,
+  toggleShowAllRepos: PropTypes.func
 }

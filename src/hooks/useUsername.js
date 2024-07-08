@@ -6,6 +6,11 @@ export function useUsername() {
   const [username, setUsername] = useState('')
   const { usernameInfo, getGithubInfoFromUser } = useGithubInfo()
   const { reposList, getReposFromUser } = useGithubRepos()
+  const [showAllRepos, setShowAllRepos] = useState(false)
+
+  const toggleShowAllRepos = () => {
+    setShowAllRepos(!showAllRepos)
+  }
 
   const changeUsername = (e) => {
     e.preventDefault()
@@ -13,6 +18,7 @@ export function useUsername() {
     setUsername(newUsername)
     getGithubInfoFromUser(newUsername)
     getReposFromUser(newUsername)
+    setShowAllRepos(false)
     // Reset username input
     e.target.usernameInput.value = ''
   }
@@ -21,6 +27,8 @@ export function useUsername() {
     username,
     usernameInfo,
     reposList,
-    changeUsername
+    changeUsername,
+    showAllRepos,
+    toggleShowAllRepos
   }
 }

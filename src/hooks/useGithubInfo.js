@@ -12,7 +12,6 @@ export function useGithubInfo() {
     try {
       const profileInfo = await fetchGithubProfile(username)
       setUsernameInfo(profileInfo)
-      console.log(profileInfo)
     } catch (err) {
       setError(err.message)
       console.error(err)
