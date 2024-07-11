@@ -4,5 +4,6 @@ import react from '@vitejs/plugin-react-swc'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), oxlintPlugin()]
+  plugins: [react(), oxlintPlugin()],
+  base: '/github-profile-devChallenges/'
 })
