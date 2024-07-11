@@ -17,7 +17,7 @@ export function Header({
         alt="Hero image of space"
         className="absolute inset-0 w-full h-full object-cover"
       />
-      <form className="relative">
+      <form className="relative" onSubmit={(e) => e.preventDefault}>
         <SearchIcon
           color="#6B727D"
           className="absolute inset-3 pointer-events-none"
