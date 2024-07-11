@@ -5,18 +5,29 @@ import { useUsername } from './hooks/useUsername'
 function App() {
   const {
     usernameInfo,
+    usernameDisplayInfo,
+    errorProfileInfo,
     reposList,
-    changeUsername,
     showAllRepos,
-    toggleShowAllRepos
+    toggleShowAllRepos,
+    changeUsername,
+    isProfileSelected,
+    isAutocompleteBoxShown,
+    selectGithubProfile
   } = useUsername()
 
   return (
     <div className="h-screen font-be-vietnam-pro bg-dark3">
-      <Header changeUsername={changeUsername} />
-      {usernameInfo && (
+      <Header
+        changeUsername={changeUsername}
+        usernameInfo={usernameInfo}
+        isAutocompleteBoxShown={isAutocompleteBoxShown}
+        selectGithubProfile={selectGithubProfile}
+        errorProfileInfo={errorProfileInfo}
+      />
+      {isProfileSelected && usernameDisplayInfo && (
         <GithubProfileInfo
-          usernameInfo={usernameInfo}
+          usernameInfo={usernameDisplayInfo}
           reposList={reposList}
           showAllRepos={showAllRepos}
           toggleShowAllRepos={toggleShowAllRepos}

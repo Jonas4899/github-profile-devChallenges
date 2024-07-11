@@ -8,5 +8,6 @@ export const fetchGithubProfile = async (username) => {
     return data
   } catch (e) {
     console.log(e)
+    throw e
   }
 }
