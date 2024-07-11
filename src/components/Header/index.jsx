@@ -10,7 +10,6 @@ export function Header({
   selectGithubProfile,
   errorProfileInfo
 }) {
-  console.log(usernameInfo)
   return (
     <header className="relative flex flex-col items-center h-[30%] p-8">
       <img
